@@ -12,6 +12,16 @@ const marketSchema = new mongoose.Schema(
     close_time: {
       type: Date,
     },
+    first_number:{
+      type: Number,
+    },
+    second_number:{
+      type: Number,
+    },
+    third_number:{
+      type: Number,
+    }
+
   },
   {
     timestamps: true,

@@ -18,8 +18,8 @@ exports.create = async (req, res, next) => {
     const today = new Date();
 
     // Extract hours and minutes from the provided open_time and close_time
-    const [openHours, openMinutes] = open_time.split(':').map(Number);
-    const [closeHours, closeMinutes] = close_time.split(':').map(Number);
+    const [openHours, openMinutes] = open_time.split(":").map(Number);
+    const [closeHours, closeMinutes] = close_time.split(":").map(Number);
 
     // Set today's date for open_time
     const parsedOpenTime = new Date(today);
@@ -46,7 +46,14 @@ exports.create = async (req, res, next) => {
 exports.getByIdandUpdate = async (req, res, next) => {
   try {
     const id = req.params.id;
-    let { open_time, name, close_time } = req.body;
+    let {
+      open_time,
+      name,
+      close_time,
+      first_number,
+      second_number,
+      third_number,
+    } = req.body;
 
     // Check if open_time and close_time are provided, and if so, update them with today's date
     if (open_time && close_time) {
@@ -54,8 +61,8 @@ exports.getByIdandUpdate = async (req, res, next) => {
       const today = new Date();
 
       // Extract hours and minutes from the provided open_time and close_time
-      const [openHours, openMinutes] = open_time.split(':').map(Number);
-      const [closeHours, closeMinutes] = close_time.split(':').map(Number);
+      const [openHours, openMinutes] = open_time.split(":").map(Number);
+      const [closeHours, closeMinutes] = close_time.split(":").map(Number);
 
       // Set today's date for open_time
       open_time = new Date(today);
@@ -68,7 +75,14 @@ exports.getByIdandUpdate = async (req, res, next) => {
 
     const updatedUser = await Model.findByIdAndUpdate(
       id,
-      { open_time, close_time, name },
+      {
+        open_time,
+        close_time,
+        name,
+        first_number,
+        second_number,
+        third_number,
+      },
       { new: true }
     );
 
@@ -81,7 +95,6 @@ exports.getByIdandUpdate = async (req, res, next) => {
     next(error);
   }
 };
-
 
 exports.getByIdandDelete = async (req, res, next) => {
   try {
