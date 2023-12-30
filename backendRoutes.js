@@ -7,6 +7,7 @@ const bid = require('./routes/backend/bidRoutes')
 const dashboard = require('./routes/backend/dashboardRoutes')
 const customer = require('./routes/backend/customerRoutes')
 const deposite = require('./routes/backend/depositeRoutes')
+const withdraw = require('./routes/backend/withdrawRoutes')
 // Use customerRoutes for all routes under '/customers'
 
 module.exports = function (app){
@@ -17,5 +18,6 @@ module.exports = function (app){
     app.use('/api/dashboard', dashboard);
     app.use('/api/customer', customer)
     app.use('/api/deposite', deposite)
+    app.use('/api/withdraw', withdraw)
 }
 
