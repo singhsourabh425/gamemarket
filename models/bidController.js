@@ -9,6 +9,12 @@ const bidSchema = new mongoose.Schema(
     bid: {
       type: String,
     },
+    type:{
+      type: String,
+    },
+    game_name:{
+      type:String
+    },
   },
   {
     timestamps: true,

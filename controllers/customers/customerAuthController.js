@@ -2,6 +2,7 @@ const Model = require("../../models/customerModel");
 const bcrypt = require("bcrypt");
 const { CUSTOMER_SATTA_KEY } = process.env;
 const jwt = require("jsonwebtoken");
+const Deposite = require('../../models/depositeModel')
 
 exports.register = async (req, res, next) => {
   try {
@@ -146,6 +147,12 @@ exports.addAmount = async (req, res, next) => {
         : Number(newAmount);
 
       const updatedUser = await user.save();
+      const data = new Deposite({
+        customer_id: decodedToken.userId,
+        amount : req.body.amount,
+      })
+      
+      await data.save();
       const { password: _, ...userWithoutPassword } = updatedUser.toObject();
 
       res.status(200).json({ status: "success", data: userWithoutPassword });

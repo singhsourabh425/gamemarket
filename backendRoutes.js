@@ -6,6 +6,7 @@ const admin = require('./routes/backend/adminAuthRoute')
 const bid = require('./routes/backend/bidRoutes')
 const dashboard = require('./routes/backend/dashboardRoutes')
 const customer = require('./routes/backend/customerRoutes')
+const deposite = require('./routes/backend/depositeRoutes')
 // Use customerRoutes for all routes under '/customers'
 
 module.exports = function (app){
@@ -15,5 +16,6 @@ module.exports = function (app){
     app.use('/api/bid', bid);
     app.use('/api/dashboard', dashboard);
     app.use('/api/customer', customer)
+    app.use('/api/deposite', deposite)
 }
 

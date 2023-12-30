@@ -4,12 +4,17 @@ exports.create = async (req, res, next) => {
   try {
     const customerId = req.params.id;
     console.log("id", customerId);
-    const { bid } = req.body;
+    let { bid, type, game_name } = req.body;
+
+    type = type.toLowerCase();
+    game_name = game_name.toLowerCase();
 
     // Create a new bank details record in the Model
     const bidDetails = new Model({
       bid,
       customer_id: customerId,
+      type,
+      game_name,
     });
 
     // Save the bank details record
