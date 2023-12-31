@@ -3,7 +3,6 @@ const Model = require("../../models/bidController");
 exports.get = async (req, res, next) => {
   try {
     const customerId = req.params.id;
-    console.log("id", 'ksjgfjggfjk');
     const bidDetails = await Model.find({ customer_id: customerId }).populate(
       "customer_id"
     );
