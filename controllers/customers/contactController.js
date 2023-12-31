@@ -6,7 +6,6 @@ exports.add = async (req, res, next) => {
 
     const contact = new Model({ mob_number, number });
 
-    // Save the market to the database
     const result = await contact.save();
     res.status(200).json({ status: "success", data: result });
   } catch (error) {

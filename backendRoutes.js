@@ -8,7 +8,8 @@ const dashboard = require('./routes/backend/dashboardRoutes')
 const customer = require('./routes/backend/customerRoutes')
 const deposite = require('./routes/backend/depositeRoutes')
 const withdraw = require('./routes/backend/withdrawRoutes')
-// Use customerRoutes for all routes under '/customers'
+const contact = require('./routes/backend/contactRoutes')
+
 
 module.exports = function (app){
     app.use('/api/market', manageMarket);
@@ -19,5 +20,6 @@ module.exports = function (app){
     app.use('/api/customer', customer)
     app.use('/api/deposite', deposite)
     app.use('/api/withdraw', withdraw)
+    app.use('/api/contact', contact)
 }
 
