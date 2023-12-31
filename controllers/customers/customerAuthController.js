@@ -2,8 +2,8 @@ const Model = require("../../models/customerModel");
 const bcrypt = require("bcrypt");
 const { CUSTOMER_SATTA_KEY } = process.env;
 const jwt = require("jsonwebtoken");
-const Deposite = require('../../models/depositeModel')
-
+const Deposite = require("../../models/depositeModel");
+const Admin = require("../../models/adminModel");
 exports.register = async (req, res, next) => {
   try {
     console.log("Customer req Body Create ", req.body);
@@ -149,9 +149,9 @@ exports.addAmount = async (req, res, next) => {
       const updatedUser = await user.save();
       const data = new Deposite({
         customer_id: decodedToken.userId,
-        amount : req.body.amount,
-      })
-      
+        amount: req.body.amount,
+      });
+
       await data.save();
       const { password: _, ...userWithoutPassword } = updatedUser.toObject();
 
@@ -166,5 +166,17 @@ exports.addAmount = async (req, res, next) => {
     }
   } catch (error) {
     next(error);
+  }
+};
+
+exports.getAdminUpi = async (req, res, next) => {
+  try {
+    const data = await Admin.findOne({
+      _id: "658863e962889d30b1faa92d",
+    }).select("upi");
+
+    res.status(200).json({ status: "success", data: data });
+  } catch (e) {
+    next(e);
   }
 };

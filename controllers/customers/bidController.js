@@ -2,10 +2,11 @@ const Model = require("../../models/bidController");
 
 exports.create = async (req, res, next) => {
   try {
+    console.log('Body', req.body);
     const customerId = req.params.id;
     console.log("id", customerId);
     let { bid, type, game_name, market_name } = req.body;
-    bid = JSON.stringify(bid);
+    // bid = JSON.stringify(bid);
     type = type.toLowerCase();
     game_name = game_name.toLowerCase();
     market_name = market_name.toLowerCase();

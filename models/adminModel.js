@@ -12,6 +12,9 @@ const adminSchema = new mongoose.Schema(
     mob_no: {
       type: String,
     },
+    upi: {
+      type: String,
+    },
   },
   {
     timestamps: true,

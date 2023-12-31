@@ -46,10 +46,10 @@ exports.login = async (req, res, next) => {
 exports.getByIdandUpdate = async (req, res, next) => {
   try {
     const id = req.params.id;
-    const { mob_no, name } = req.body;
+    const { mob_no, name, upi } = req.body;
     const updatedUser = await Model.findByIdAndUpdate(
       id,
-      { mob_no, name },
+      { mob_no, name, upi },
       { new: true }
     );
 
