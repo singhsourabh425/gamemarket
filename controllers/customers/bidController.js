@@ -7,6 +7,7 @@ exports.create = async (req, res, next) => {
     console.log("id", customerId);
     let { bid, type, game_name, market_name } = req.body;
     // bid = JSON.stringify(bid);
+    bid = JSON.parse(bid);
     type = type.toLowerCase();
     game_name = game_name.toLowerCase();
     market_name = market_name.toLowerCase();
