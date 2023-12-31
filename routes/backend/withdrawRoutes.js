@@ -7,4 +7,6 @@ router.post("/withdraw/:id", handleFormData, controller.withdrawStatus);
 router.post("/update-withdraw/:id", handleFormData, controller.updateStatus);
 router.get("/pending-amount", handleFormData, controller.getPendingWithdraw);
 
+router.post("/update-amount/:id", handleFormData, controller.updateAmount);
+
 module.exports = router;
