@@ -15,6 +15,9 @@ const bidSchema = new mongoose.Schema(
     game_name:{
       type:String
     },
+    market_name:{
+      type:String
+    }
   },
   {
     timestamps: true,
