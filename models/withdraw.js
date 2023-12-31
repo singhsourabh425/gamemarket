@@ -9,9 +9,13 @@ const Schema = new mongoose.Schema(
     amount: {
       type: Number,
     },
-    account_type :{
-        type: mongoose.Schema.Types.ObjectId,
-    }
+    account_type: {
+      type: String
+    },
+    status: {
+      type: String,
+      default: 'pending'
+    },
   },
   {
     timestamps: true,

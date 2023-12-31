@@ -2,8 +2,6 @@ const Model = require("../../models/contactModel");
 
 exports.add = async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
-    console.log("req.bodyjshfhui");
     const { mob_number, number } = req.body;
 
     const contact = new Model({ mob_number, number });
