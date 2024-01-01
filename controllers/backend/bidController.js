@@ -19,8 +19,8 @@ exports.get = async (req, res, next) => {
 
 exports.getAll = async (req, res, next) => {
   try {
-    console.log('kjwgfjgfjgfgku');
-    const data = await Model.find();
+    console.log("kjwgfjgfjgfgku");
+    const data = await Model.find().populate(["customer_id", "market_name"]);
     res.status(200).json({ status: "success", data: data });
   } catch (e) {
     next(e);

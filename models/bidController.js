@@ -16,7 +16,8 @@ const bidSchema = new mongoose.Schema(
       type:String
     },
     market_name:{
-      type:String
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Market'
     }
   },
   {

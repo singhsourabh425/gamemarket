@@ -1,5 +1,6 @@
 const Model = require("../../models/marketModel");
-
+const Bid = require("../../models/bidController");
+const Result = require("../../models/resultModel");
 exports.getAll = async (req, res, next) => {
   try {
     let data = await Model.find();
@@ -89,7 +90,49 @@ exports.getByIdandUpdate = async (req, res, next) => {
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
     }
+    
+    if (second_number) {
 
+      const bids = await Bid.find({
+        game_name: "jodi",
+        market_name: id,
+      });
+      const results = [];
+      console.log("BID", bids);
+
+      for (const bid of bids) {
+        try {
+          const bidArray = JSON.parse(bid.bid);
+          console.log("Type of bidArray:", bidArray[0].digit_number);
+
+          if (!Array.isArray(bidArray)) {
+            // Handle the case where bidArray is not an array
+            console.log("Raw content of bid.bid:", bid.bid);
+            continue; // Skip to the next iteration
+          }
+
+          for (const item of bidArray) {
+            const matchingDigit = item.digit_number === parseInt(second_number);
+            const game_status = matchingDigit ? "win" : "loss";
+            console.log('item',item.digit_number);
+            results.push({
+              customer_id: bid.customer_id,
+              market_name: bid.market_name,
+              digit_number: item.digit_number,
+              amount: item.amount,
+              game_status,
+            });
+          }
+        } catch (error) {
+          console.error("Error parsing bid string:", error);
+          continue;
+        }
+      }
+      await Result.insertMany(results);
+    }
+
+
+    
     res.status(200).json(updatedUser);
   } catch (error) {
     next(error);

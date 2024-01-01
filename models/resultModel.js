@@ -12,11 +12,21 @@ const Schema = new mongoose.Schema(
       type: String,
     },
     market_name: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Market"
     },
     game_status :{
         type:String
-    }
+    },
+    result:{
+      type:String
+    },
+    digit_number :{
+      type:Number
+    },
+    amount:{
+      type:Number
+    },
   },
   {
     timestamps: true,

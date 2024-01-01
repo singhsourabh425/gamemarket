@@ -9,6 +9,8 @@ const customer = require('./routes/backend/customerRoutes')
 const deposite = require('./routes/backend/depositeRoutes')
 const withdraw = require('./routes/backend/withdrawRoutes')
 const contact = require('./routes/backend/contactRoutes')
+const update = require('./routes/backend/updatesRoutes')
+const result = require('./routes/backend/resultRoutes')
 
 
 module.exports = function (app){
@@ -20,6 +22,7 @@ module.exports = function (app){
     app.use('/api/customer', customer)
     app.use('/api/deposite', deposite)
     app.use('/api/withdraw', withdraw)
-    app.use('/api/contact', contact)
+    app.use('/api/update', update)
+    app.use('/api/result', result)
 }
 

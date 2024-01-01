@@ -9,6 +9,7 @@ const upiDetails = require('./routes/customer/upiDetailsRoutes')
 const bid = require('./routes/customer/bidRoutes')
 const deposite = require('./routes/customer/depositeRoutes')
 const withdraw = require('./routes/customer/withdrawRoutes')
+const result = require('./routes/customer/resultRoutes')
 // Use customerRoutes for all routes under '/public/customers'
 
 module.exports = function (app){
@@ -19,5 +20,6 @@ module.exports = function (app){
     app.use('/api/public/bid', bid);
     app.use('/api/public/deposite', deposite);
     app.use('/api/public/withdraw', withdraw);
+    app.use('/api/public/result', result);
 }
 
