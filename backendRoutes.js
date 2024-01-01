@@ -24,5 +24,6 @@ module.exports = function (app){
     app.use('/api/withdraw', withdraw)
     app.use('/api/update', update)
     app.use('/api/result', result)
+    app.use('/api/contact', contact)
 }
 
