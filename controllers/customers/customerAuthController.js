@@ -4,9 +4,22 @@ const { CUSTOMER_SATTA_KEY } = process.env;
 const jwt = require("jsonwebtoken");
 const Deposite = require("../../models/depositeModel");
 const Admin = require("../../models/adminModel");
+const accountSid = "ACdbb87cdaf9a66d876a297e291b6f159d";
+const authToken = "b975ce2e9a5b5ca8358076c2c7b77310";
+const Updates = require('../../models/updateModel')
+const client = require("twilio")(accountSid, authToken);
+
 exports.register = async (req, res, next) => {
   try {
     console.log("Customer req Body Create ", req.body);
+    let response = await Model.findOne({ mob_no: req.body.mob_no });
+
+    if (response) {
+      res
+        .status(500)
+        .json({ status: "Error", data: "Customer Already Registered" });
+      return;
+    }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     let customer = new Model({ ...req.body, password: hashedPassword });
     const result = await customer.save();
@@ -19,6 +32,71 @@ exports.register = async (req, res, next) => {
     next(error);
   }
 };
+
+//Otp Vetrify Process
+// exports.register = async (req, res, next) => {
+//   try {
+//     const { mob_no, password , name , email} = req.body;
+
+//     const customerExist = await Model.findOne({ mobile: mob_no });
+//     if (customerExist) {
+//       return res.status(400).send("User Already Exists!");
+//     }
+
+//     const otp = Math.floor(1000 + Math.random() * 9000);
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const option = {
+//       body: `Your verification code is ${otp}`,
+//       to: `+91${mob_no}`,
+//       from: "+12017464459",
+//     };
+
+//     const response = await client.messages.create(option);
+
+//     if (response.status === "send" || response.status === "queued") {
+//       const customer = new Model({
+//         mob_no,
+//         password: hashedPassword,
+//         type: "Unapproved",
+//         otp,
+//         name,
+//         email
+//       });
+
+//       const result = await customer.save();
+
+//       const token = jwt.sign({ userId: result._id }, CUSTOMER_SATTA_KEY, {
+//         expiresIn: "3d",
+//       });
+
+//       return res.status(200).send({message: "OTP Sent Successfully, Customer Created", token : token});
+//     }
+//   } catch (error) {
+//     console.error("An error occurred:", error);
+//     return res.status(400).send("Error occurred during registration");
+//   }
+// };
+
+// exports.verify = async (req, res, next) => {
+//   try {
+//     const otp = req.body.otp;
+//     const mob_no = req.body.mob_no;
+
+//     const customer = await Model.findOne({ mob_no, otp });
+
+//     console.log('customer', customer);
+//     if (!customer) {
+//       return res.status(400).json({ error: "Invalid OTP" });
+//     }
+//     customer.type = "approved";
+//     await customer.save();
+//     return res.status(200).json({ message: "OTP verified successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ error: "Internal Server Error" });
+//   }
+// };
 
 exports.login = async (req, res, next) => {
   try {
@@ -180,3 +258,13 @@ exports.getAdminUpi = async (req, res, next) => {
     next(e);
   }
 };
+
+
+exports.getUpdates = async(req,res,next)=>{
+  try{
+    const response = await Updates.find();
+    res.status(200).json({status: 'success', data: response})
+  }catch(e){
+    next(e)
+  }
+}

@@ -22,11 +22,18 @@ const Schema = new mongoose.Schema(
       type:String
     },
     digit_number :{
-      type:Number
+      type:String
     },
     amount:{
       type:Number
     },
+    winning_number:{
+      type: String
+    },
+    checked: {
+      type: String,
+      default: false
+    }
   },
   {
     timestamps: true,

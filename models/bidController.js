@@ -18,6 +18,10 @@ const bidSchema = new mongoose.Schema(
     market_name:{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Market'
+    },
+    marked : {
+      type: String,
+      default:'no'
     }
   },
   {

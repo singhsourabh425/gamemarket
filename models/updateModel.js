@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = new mongoose.Schema({
-  text: {
+  text1: {
+    type: String,
+  },
+  text2: {
     type: String,
   },
 });

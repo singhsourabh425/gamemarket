@@ -16,7 +16,7 @@ const marketSchema = new mongoose.Schema(
       type: Number,
     },
     second_number:{
-      type: Number,
+      type: String,
     },
     third_number:{
       type: Number,

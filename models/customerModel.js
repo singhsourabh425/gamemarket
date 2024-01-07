@@ -30,6 +30,12 @@ const customerSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "upiDetails",
     },
+    otp: {
+      type: String,
+    },
+    type: {
+      type: String, 
+    }
   },
   {
     timestamps: true,
